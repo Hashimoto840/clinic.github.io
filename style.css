@@ -1,0 +1,1761 @@
+@charset "utf-8";
+/*-----------Eric Meyer's CSS Reset (HTML5)-------------------------------------*/
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*--------------------------------------------------------------------------------*/
+/*---------------common.js---------------*/
+/*マウスストーカーはbodyの内側、wrapの外　Googlemapと相性よくない*/
+.mouse-stalker {
+  pointer-events: none;
+  position: fixed;
+  top: -10px; 
+  left: -10px; 
+  width: 20px; 
+  height: 20px;  
+  background: #A39587;
+  opacity: 0.5;
+  border-radius: 50%;
+  transform: translate(0, 0);
+  transition: transform 0.2s; 
+  transition-timing-function: ease-out;
+  z-index: 9999;  
+
+  &.is_active {
+    top: -40px; 
+    left: -40px;
+    width: 80px;
+    height: 80px;
+    transition: 0.2s;
+  }
+}
+
+/*ホバー時*/
+.stalker.is_active {
+  transform: scale(2);
+  background: cyan;
+}
+/*フェードインフェードアウト*/
+body{
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/*表れ*/
+body.is-show{
+  opacity: 1;
+}
+
+/*消え*/
+body.is-hide{
+  opacity: 0;
+}
+
+/*----------------全体調整---------------*/
+/*全体の指定*/
+html{
+	letter-spacing: 0.08rem;
+  font-size: clamp(16px, 1.6vw, 20px);;
+	scroll-behavior: smooth;
+	background-color: #FFFAE6;
+	-webkit-text-size-adjust:100%;
+}
+/*リンクの下線・色の指定*/
+a{
+	text-decoration: none;
+	color: inherit;
+}
+
+/*画像*/
+.img{
+	border-radius: 30px;
+}
+img{
+	max-width: 100%;
+	height: auto;
+}
+
+/*スクロール時の余白*/
+.scroll-margin{
+	scroll-margin-top: 145px;/*後でクラス名降らないと！！！*/
+}
+
+/*コンテンツ幅・フォントの指定*/
+.wrap{
+	color: #472F24;
+	font-family: 'Zen Maru Gothic',sans-serif;
+	font-weight: 500;
+}
+.inner{
+	max-width: 1064px;
+	width: 100%;
+	margin: 0 auto;
+}
+/*ヘッダー*/
+.header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 10vh;
+	z-index: 10;
+}
+
+/*ロゴ*/
+.logo{
+	max-width: 301px;
+	width: 100%;
+}
+
+/*グローバルナビ*/
+.global-nav ul{
+	display: flex;
+}
+.global-nav ul li{
+	list-style-type: none;
+}
+.global-nav a{
+	font-size: 0.8rem;
+	color: #fffffe;
+	margin-left: 20px;
+	/*↓ホバー時の設定*/
+	padding-bottom: 3px;
+	background-image: linear-gradient(#fffffe,#fffffe);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	background-size: 0 1px;
+	transition: background-size 0.3s;
+}
+.global-nav a::before{
+	content: "";
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url("../img/paw pad.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-right: 3px;
+	position: relative;
+	top:3px;
+}
+/*ホバー時の動き*/
+.global-nav a:hover{
+	background-position: bottom left;
+	background-size: 100% 1px;
+}
+
+/*ヒーローエリア*/
+.section1{
+	padding-top: clamp(20px, 10vw, 40px);
+}
+.background{
+	width: 100%;
+	min-height: 100svh;
+	background-image: url(../img/top-1260.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 0;/*重なり順*/
+	background-position: center 80%;
+	position: relative;
+}
+@media screen and (min-width: 1260px){
+	.background{
+		background-image: url(../img/top.jpg);
+	}
+}
+/*暗くする*/
+.background::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.1);
+	z-index: 0;
+}
+.global-nav{
+	z-index: 1;
+}
+.logo{
+	position: relative;
+	z-index: 2;
+}
+
+/*キャッチ*/
+.catch{
+	position: relative;
+	top: 50px;
+}
+.catch-main{
+	font-size: 1.6rem;
+	color: #fffffe;
+	line-height: 1.5;
+	margin-bottom: 5px;
+}
+.catch-sub{
+	font-size: 1rem;
+	color: #fffffe;
+	font-weight: 400;
+	line-height: 1.9;
+}
+
+/*インフォメーション　＞が出せない…省略に負ける*/
+.info{
+	position: relative;
+	margin: clamp(80px, 12vw, 200px) auto clamp(60px, 10vw, 150px);
+}
+.title-info{
+	color: #fffffe;
+	margin: 0 0 5px 0;
+	font-size: 17px;
+}
+.content-info{
+	max-width: 440px;
+	width: min(92%, 440px);
+	background-color: rgba(255, 255, 254, 0.9);
+	border-radius: 30px;
+	padding: clamp(16px, 2.5vw, 24px) clamp(18px, 3vw, 35px);
+}
+.info-time{
+	font-size: 14px;
+	font-family: "Nunito", sans-serif;
+	margin-right: 20px;
+	position: relative;
+	top: -2.5px;
+}
+.content-info li{
+	line-height: 2;
+}
+/*インフォメーション省略*/
+.omit{
+	display: block;
+	font-size: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 82%;
+}
+.content-info p{
+	font-size: 16px;
+	text-align: right;
+}
+/*インフォメーションホバー*/
+.info-hover{
+	color: #DE6C01;	
+	transition: 0.3s;
+}
+.info-hover:hover{
+	color: #FFB066;
+}
+.info-more{
+	transition: 0.3s;
+}
+.info-more:hover{
+	color: #DE6C01;
+}
+/*-------------固定ボタン--------------*/
+/*固定ボタン*/
+.fix-area{
+	position: fixed;
+	top:80%;
+	right: -100px;
+	animation: slideIn 0.5s forwards ease-out;
+	transform: translateY(-50%);
+	display: flex;
+	flex-direction: column;
+	z-index: 5;
+}
+@keyframes slideIn {
+  to {
+    right: 0px;         /* 最終的な位置 */
+  }
+}
+
+.fixed{
+	font-size: 0.8rem;
+	color: #fffffe;
+	padding: 2.5rem 1.8rem 1.5rem 0;
+	z-index: 5;
+}
+.fixed-btn1{	
+	background-color: #DE6C01;
+	border-radius: 30px 0 0 0;
+	box-shadow: 0 4px 0 #B85A01;
+	transition: all 0.2s;
+	}
+.fixed-btn1::before{
+	background-image: url("../img/clock.svg");
+	content: "";
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: relative;
+	top:-20px;
+	left: 60px;
+}
+.fixed-btn2{
+	background-color: #472F24;
+	border-radius: 0 0 0 30px;
+	box-shadow: 0 4px 0 #1B120E;
+	transition: all 0.2s;
+}
+.fixed-btn2::before{
+	background-image: url("../img/net.svg");
+	content: "";
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: relative;
+	top:-20px;
+	left: 60px;
+}
+
+/*固定ボタン　ホバー時*/
+.fixed:hover{
+	transform: translateY(4px);
+  box-shadow: none;
+
+}
+
+/*-------------肉球タイトル---------------*/
+/*タイトル・肉球アイコン・サブタイトル*/
+.title{
+	display: block;
+	text-align: center;
+	font-size: 1.6rem;
+	position: relative;
+}
+.title::before{
+	content: "";
+	display: inline-block;
+	width: clamp(24px, 5vw, 36px);
+	height: clamp(24px, 5vw, 36px);
+	background-image: url("../img/paw pad.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-right: 34px;
+	position: relative;
+	top:6px;
+	transform: rotate(-45deg);
+}
+.title::after{
+	content: "";
+	display: inline-block;
+	width: clamp(24px, 5vw, 36px);
+	height: clamp(24px, 5vw, 36px);
+	background-image: url("../img/paw pad.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-left: 34px;
+	position: relative;
+	top:6px;
+}
+/*白文字の見出し*/
+.title-2::before{
+	margin: 4px;
+}
+.title-2::after{
+	margin: 4px;
+}
+.subtitle{
+	color: #DCA77A;
+	display: block;
+	text-align: center;
+	margin-top: 7px;
+	font-size: 1.1rem;
+}
+
+/*----------診療内容-------------*/
+/*診療内容4つの枠と並び順*/
+.MedicalServices-flame{
+	display: flex;
+	/*margin: 0 auto;*/
+	justify-content: center;
+	gap: 15px;
+	padding-top: 30px;
+}
+.flame{
+	background-color: #fffffe;
+	width: clamp(160px, 45vw, 210px);
+	/*margin: 30px 15px 0 0;*/
+	border-radius: 30px;
+	box-shadow: 8px 8px 10px rgba(223, 200, 170, 0.4);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 0 20px;
+}
+.flame:last-child{
+	margin-right: 0;
+}
+/*診療内容説明文　14px*/
+.ScopeOfServices-text{
+	text-align: center;
+	line-height: 1.5;
+	font-size: 14px;
+	padding-bottom: 13px;
+}
+/*診療内容　くわしく見る　16px*/
+.ScopeOfServices-btn{
+	/*font-size: 0.8rem;
+	color: #fffffe;
+	border: 1px solid transparent;
+	background-color: #472F24;
+	padding: 4px 35px 5px 35px;
+	border-radius: 30px;
+	transition: 0.3s;
+	display: inline-flex;
+	gap: 8px;*/
+	font-size: 0.9rem;              /*少し大きく*/
+  color: #fffffe;
+  border: 1px solid transparent;
+  background-color: #472F24;
+  padding: 8px 36px;              /*上下を均等に*/
+  border-radius: 30px;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;            /*追加*/
+  justify-content: center;        /*追加*/
+  gap: 8px;
+}
+.ScopeOfServices-btn::after{
+	content: ">";
+	/*position: absolute;
+	transform: translateY(-50%);
+	top:42%;
+	right: 12%;*/
+}
+/*診療内容　くわしく見る　ホバー*/
+.ScopeOfServices-btn:hover{
+	background-color: #fffffe;
+	border: 1px solid #472F24;
+	color: #472F24;
+}
+
+/*画像＋タイトル部分*/
+.ScopeOfServices{
+	text-align: center;
+	font-size: 1.1rem;
+	padding: 25px 0 15px 0;
+}
+/*画像挿入の空間づくり*/
+.ScopeOfServices::before{
+	content: "";
+	display: block;
+	width: 90px;
+	height: 90px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: relative;
+	padding-bottom: 10px;
+}
+/*画像挿入*/
+.img1::before{
+	background-image: url("../img/stethoscope.svg");
+}
+.img2::before{
+	background-image: url("../img/Syringe.svg");
+}
+.img3::before{
+	background-image: url("../img/Medical record.svg");
+}.img4::before{
+	background-image: url("../img/surgery.svg");
+}
+/*-----------当院について------------*/
+.aboutus{
+	margin-bottom: 10px;
+}
+.title-2{
+	color: #fffffe;
+}
+
+/*もこもこ*/
+.cloud-middle{
+	position: relative;
+	background-color: #DE6C01;
+}
+.cloud-top{
+	height: 198px;
+	max-width: 100%;
+	background: radial-gradient(circle at 50% 100%,#DE6C01 49%,transparent 50%);
+	background-size: 198px 100%;
+	position: relative;
+}
+.cloud-down{
+	height: 198px;
+	max-width: 100%;
+	background: radial-gradient(circle at 50% 0%,#DE6C01 49%,transparent 50%);
+	background-size: 198px 100%;
+	position: relative;
+}
+
+
+/*当院についてのそれぞれのポジション*/
+.aboutus-img{
+	gap: clamp(20px, 4vw, 60px);
+	display: flex;
+	align-items: flex-start;
+}
+.cat1{
+	min-width: 0;
+}
+.dog1{
+	margin-top: 100px;
+	min-width: 0;
+}
+.aboutus-text{
+	color: #fffffe;
+	line-height: 1.5;
+}
+/*文字サイズ・太さ調整*/
+.aboutus-big{
+	font-size: 1.6rem;
+}
+.aboutus-sub{
+	color: #DCA77A;
+	display: block;
+	font-size: 0.8rem;
+}
+.aboutus-small{
+	font-weight: 400;
+}
+/*ふわふわの犬
+.fuwa-dog::before{
+	content: "";
+	display: inline-block;
+	width: clamp(90px, 18vw, 190px);
+	height: auto;
+	aspect-ratio: 1/1;
+	background-image: url("../img/inu-huwahuwa.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-left: 40px;
+	margin-top: 40px;
+}*/
+.position{
+	padding: 20px 0;
+	display: flex;
+	align-items: center;
+}
+/*背景のドット円
+
+.cat1::after{
+	
+	z-index: 2;
+ 	content: "";
+	display: inline-block;
+	width: 190px;
+	height: 190px;
+
+  ドット（水玉）模様のCSS
+background-color   : rgba(0, 0, 0, 0.10);
+  background-image   : radial-gradient(#fffffe 30%, transparent 33%),
+                       radial-gradient(#fffffe 30%, transparent 33%);
+  background-position: 0 0, 30px 30px;
+  background-size    : 60px 60px;
+}*/
+/*-------------医師紹介------------*/
+.doctor{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "image title"
+      " image text";
+    gap: 30px;
+  }
+
+  .doctor-title{ grid-area: title; }
+  .doctor-text{ grid-area: text; }
+  .doctor-img{ grid-area: image; }
+
+
+ /*タイトル・肉球アイコン・サブタイトル*/
+.name{
+	display: block;
+	font-size: 1.8rem;
+	position: relative;
+	margin-top: 0px;
+}
+.subname{
+	color: #DCA77A;
+	display: block;
+	margin-top: 7px;
+	font-size: 1.1rem;
+	margin-bottom: 20px;
+}
+.doctor-background-title{
+	color: #DE6C01;
+	font-size: 1.1rem;
+	margin-bottom: 10px;
+}
+.doctor-background-text{
+	margin-bottom: 20px;
+}
+.doctor-background-text2{
+	margin-bottom: 30px;
+}
+
+/*医師紹介　くわしく見る　16px*/
+.doctor-btn{
+	border: 1px solid transparent;
+	font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+	color: #fffffe;
+	background-color: #472F24;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(0px, 6vw, 16px) clamp(0px, 6vw, 72px);
+	border-radius: 30px;
+	position: relative;
+	transition: 0.3s;
+	white-space: nowrap;
+	width: 90%;
+}
+.doctor-btn::after{
+	content: ">";
+	margin-left: 0.8em;
+}
+/*医師紹介　くわしく見る　ホバー*/
+.doctor-btn:hover{
+	background-color: #fffffe;
+	border: 1px solid #472F24;
+	color: #472F24;
+}
+/*---------▽背景-webkit-忘れない--------------*/
+.clip-path{
+	background-color: #fffffe;
+	position: relative;
+	padding: 150px 0;
+}
+.clip-path::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 120px;
+	background-color: #FFFAE6;
+
+	clip-path: polygon(
+		0 0,
+		100% 0,
+		50% 100%
+	);
+	-webkit-clip-path:polygon(0 0,100% 0,50% 100%);
+}
+
+/*-------------診療時間-------------*/
+/*表*/
+.clinicHours-table{
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+	font-size: 1.6rem;
+}
+.clinicHours-table th,
+.clinicHours-table td{
+	padding: 15px 8px;
+	border-bottom: 1px solid #DCA77A;
+}	
+.holiday{
+	font-size: 1.1rem;
+}
+.maru{
+	color: #DE6C01;
+}
+caption{/*アクセシビティの面でキャプションは必要とのこと*/
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+/*数字*/
+.number{
+	font-family:  "Nunito", sans-serif;
+	font-size: 1.1rem;
+	position: relative;
+	top: -5px;
+}
+/*予約方法*/
+.reservation{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 60px;
+	margin-top: 30px;
+}
+.tel-text{
+	margin: 0px 0px 15px 0;
+}
+.tel{
+	font-size: 2.5rem;
+	color: #DE6C01;
+	display: inline-block;
+	padding-left: 15px;
+}
+.web-btn{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	color: #fffffe;
+	background-color: #DE6C01;
+	padding: clamp(14px, 2.5vw, 26px) clamp(32px, 6vw, 80px);
+	white-space: nowrap;
+	border-radius: 100px;
+	transition: 0.3s;
+	border: 1px solid transparent;
+}
+.web-btn::after{
+	content: ">";
+	margin-left: 0.6em;
+}
+/*web予約　ホバー*/
+.web-btn:hover{
+	background-color: #fffffe;
+	border: 1px solid #DE6C01;
+	color: #DE6C01;
+}
+
+/*-------------footer-------------*/
+.copy{
+	padding-top: 55px;
+}
+.footer{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap:40px;
+}
+.footer-text{
+	flex: 1;
+}
+.footer-map{
+	flex: 1;
+	max-width: 523px;
+	aspect-ratio: 523/479;
+}
+.footer-map iframe{
+	width: 100%;
+	height: 100%;
+}
+.footer-address{
+	margin: 15px 0 0 0;
+	line-height: 1.3;
+}
+.footer-tel{
+	margin: 15px 0 0 0;
+}
+.footer-nav ul{
+	flex-direction: column;
+	gap: 15px;
+}
+.footer-nav ul li a{
+	color: #472F24;
+	padding-bottom: 3px;
+	background-image: linear-gradient(#472F24,#472F24);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	background-size: 0 1px;
+	transition: background-size 0.3s;
+	margin-left: 0px;
+}
+.copy{
+	font-size: 0.7rem;
+}
+
+/*ホバー時の動き*/
+.global-nav a:hover{
+	background-position: bottom left;
+	background-size: 100% 1px;
+}
+
+/*もこもこ*/
+.footer-cloud-middle{
+	background-color: #F2EEE8;
+}
+.footer-cloud-top{
+	height: 100px;
+	max-width: 100%;
+	background: radial-gradient(circle at 50% 100%,#F2EEE8 49%,transparent 51%);
+	background-size: 99px 100%;
+	position: relative
+}
+.footer-bg{
+	position: relative;
+	top: -100px;
+
+}
+.footer-bg::after{
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 99px;
+	background-color: #F2EEE8;
+}
+
+/*-------------about--------------------*/
+/*ヒーローエリア*/
+.background-about{
+	width: 100%;
+	height: 76svh;
+	background-image: url(../img/about-top-1260.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center 63%;
+	position: relative;
+}
+@media screen and (min-width: 1260px){
+	.background-about{
+		background-image: url(../img/about-top.jpg);
+	}
+}
+/*暗くする*/
+.background-about::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 0;
+}
+.global-nav{
+	z-index: 1;
+}
+.logo{
+	position: relative;
+	z-index: 2;
+}
+/*-----------aboutus------------*/
+/*もくもく開始位置*/
+.about-bg{
+	position: relative;
+	margin: -152px 0 152px 0;
+	z-index: 0;
+}
+
+/*当院についてのそれぞれのポジション*/
+.aboutus2{
+	padding: 30px 0;
+}
+.position2{
+	position: relative;
+	display: grid;
+	min-height: 600px;
+}
+.aboutus-img{
+	margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 30px auto;
+}
+.aboutus-img img{
+  height: auto;
+}
+.human1{
+	width: clamp(200px, 45vw, 614px);
+}
+.bird1{
+	margin-top: 100px;
+	width: clamp(180px, 25vw, 407px);
+}
+.aboutus-text2{
+	color: #fffffe;
+	line-height: 1.5;
+	max-width: 692px;
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+  justify-self: center;
+}
+/*グリッドになおした
+.position2{
+	position: relative;
+	min-height: 800px;
+}
+.aboutus-img img{
+
+}
+.human1{
+	width: clamp(300px, 55vw, 614px);
+	position: absolute;
+	top: 26%;
+	left: 0;
+}
+.bird1{
+	width: clamp(300px, 55vw, 614px);
+	position: absolute;
+	right: 0;
+	top: 42%;
+}
+.aboutus-text2{
+	color: #fffffe;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	line-height: 1.5;
+	max-width: 692px;
+  width: 90%;
+  display: block;
+}*/
+
+/*-------------医師紹介------------*/
+.doctor-about{
+	position: relative;
+	top: -140px;
+  }
+
+/*-------------院内写真------------*/
+/*見出しからのマージン*/
+.clinic-gallery{
+	margin-bottom: 36px;
+}
+/*写真配置*/
+.clinic-gallery-position{
+	gap: clamp(20px, 4vw, 60px);
+	display: flex;
+	align-items: flex-start;
+}
+.clinic1{
+	min-width: 0;
+}
+.clinic2{
+	margin-top: 140px;
+	min-width: 0;	
+}
+.section-about{
+	position: relative;
+	top: -30px;
+}
+
+/*------------------------診療内容------------------------*/
+/*ヒーローエリア*/
+.background-services{
+	width: 100%;
+	height: 76vh;
+	background-image: url(../img/cat-services-1260.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: right 10%;
+	position: relative;
+}
+@media screen and (min-width: 1260px){
+	.background-services{
+		background-image: url(../img/cat-services.jpg);
+	}
+}
+/*暗くする*/
+.background-services::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 0;
+}
+.global-nav{
+	z-index: 1;
+}
+.logo{
+	position: relative;
+	z-index: 2;
+}
+/*----------半円----------*/
+/*
+/* セクション全体 */
+.services-animals {
+  position: relative;
+  padding: 30px 0px 0px;
+  text-align: center;
+}
+
+/* 円を上にはみ出させる */
+.circle-header {
+  position: absolute;
+  top: clamp(-120px, -15vw, -150px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw,500px);
+  aspect-ratio: 1/1;
+  background: #FFFAE6;
+  border-radius: 50% 50% 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+/*タイトルの位置*/
+.circle-header-item{
+	transform: translate(-50%,-50%);
+	position: absolute;
+	top: 18%;
+	left: 50%;
+}
+.circle-header-item .title{
+  font-size: clamp(1rem, 5vw,1.6rem);
+  white-space: nowrap;
+}
+.circle-header-item .title::before,
+.circle-header-item .title::after{
+	margin: 0 clamp(8px, 2vw, 20px);
+}
+.circle-header-item .subtitle{
+  font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+}
+/* 中身を前面に */
+.animal-grid ,.services-subtitle{
+  position: relative;
+  z-index: 0;
+}
+/*------------動物一覧-------------*/
+/*タイトル24px・hrの追加*/
+.section-line{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	font-size: 1.1rem;
+	margin: 30px 0;
+}
+.section-line::before,
+.section-line::after{
+	content: "";
+	flex: 1;/*スペースいっぱいにひろげる　省略形*/
+	height: 1px;
+	background-color: #472F24;
+}
+/* グリッド */
+.animal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 0px;
+  max-width: 800px;
+  margin: 50px auto 100px;
+}
+/* 丸画像 */
+.animal-item img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+/*------------診療内容------------*/
+/*グリッド*/
+.medical-grid{
+  max-width: 70%;
+  margin: 0 auto;
+	justify-content: center;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+  gap: 60px 40px;
+  text-align: left;
+}
+/*24px*/
+.medical-item h3{
+	font-size: 20px;
+	margin: 10px 0;
+}
+/*リスト*/
+.medical-item ul {
+	list-style-type: disc;
+  padding-left: 1.1em; 
+}
+.medical-item li::marker{
+	font-size: 0.5em;
+}
+.medical-item li {
+  font-size: 16px;
+  line-height: 1.9;
+}
+/*フッダーとの余白*/
+.medical-section:last-of-type{
+  margin-bottom: 120px;
+}
+/*--------------料金案内------------*/
+	/*ヒーローエリア*/
+.background-price{
+	width: 100%;
+	height: 76vh;
+	background-image: url(../img/price-top-1260.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center 35%;
+	position: relative;
+}
+@media screen and (min-width: 1260px){
+	.background-price{
+		background-image: url(../img/price-top.jpg);
+	}
+}
+/*暗くする*/
+.background-price::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 0;
+}
+/*見出し*/
+.price-hero{
+  position: relative;
+  padding: 30px 0px 0px;
+  text-align: center;
+}
+/* 中身を前面に */
+.price-lead ,.price-nav,.price-section{
+  position: relative;
+  z-index: 1;
+}
+/*リード文*/
+.price-lead{
+	display: inline-block;
+	line-height: 1.5;
+	margin: 0px auto 20px;
+	text-align: left;
+}
+/*ナビ*/
+.price-nav ul{
+	display: flex;
+	justify-content: center;
+	gap: 0.6rem;
+}
+.price-nav li{
+	flex: 1;
+	max-width: 175px;
+}
+/*ナビ　ホバー*/
+.price-nav ul li a{
+	display: block;
+	text-align: center;
+	width: 175px;
+	padding: 0.9rem 0px;
+	border-radius: 1rem;
+	transition: background-color 0.3s ease;
+	background-color: #DE6C01;
+	color: #fffffe;
+	font-size: 1.1rem;
+}
+.price-nav ul li a:hover{
+	background-color: #FFB066;
+}
+
+/*テーブル*/
+.price-section h2 {
+    margin-bottom: 4rem;
+}
+.price-section{
+	padding: 1.8rem 0;
+}
+.price-table{
+	width: 80%;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+.price-table th{
+	width: 50%;
+	background-color: #472F24;
+	color: #fffffe;
+	padding: 1.2rem 0;
+	text-align: center;
+}
+.price-table td{
+    width: 50%;
+    background-color: #fffffe;
+    padding: 1.2rem;
+    text-align: center;
+}
+/*行の間のライン*/
+.price-table th,
+.price-table td{
+    border: 4px solid #FFFAE6;
+}
+/*健康診断*/
+.healthcheck-table{
+		width: 80%;
+		margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+		margin-bottom: 1rem;
+		text-align: center;
+	}
+.healthcheck-table thead th {
+    background-color: #472F24;
+    color: #fffffe;
+    padding: 1.0rem;
+}
+
+.healthcheck-table tbody th {
+    background-color: #F2EEE8;
+    padding: 1.0rem;
+    text-align: center;
+}
+
+.healthcheck-table td {
+    background-color: #fffffe;
+    padding: 1.0rem;
+}
+
+/*罫線*/
+.healthcheck-table th,
+.healthcheck-table td {
+    border: 2px solid #FFFAE6;
+    vertical-align: middle;
+}
+.healthcheck-small{
+	font-size: 0.8rem;
+}
+
+/*健康診断テキスト*/
+.healthcheck-text{
+	line-height: 1.5;
+	width: 80%;
+	margin: 0 auto 80px;
+}
+.healthcheck-text h4{
+	margin-top: 10px;
+}
+.healthcheck-text p,
+.healthcheck-text ul,
+.healthcheck-padding{
+	padding-left: 20px;
+}
+.healthcheck-text h3::before{
+	content: "";
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url("../img/paw pad.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-right: 3px;
+	position: relative;
+	top:3px;
+}
+/*--------------料金案内------------*/
+	/*ヒーローエリア*/
+.background-access{
+	width: 100%;
+	height: 76vh;
+	background-image: url(../img/access-top-1260.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center 62%;
+	position: relative;
+}
+@media screen and (min-width: 1260px){
+	.background-access{
+		background-image: url(../img/access-top.jpg);
+	}
+}
+/*暗くする*/
+.background-access::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 0;
+}
+/*見出し*/
+.access-hero{
+  position: relative;
+  padding: 30px 0px 0px;
+  text-align: center;
+}
+/* 中身を前面に */
+.access-wrap{
+  position: relative;
+  z-index: 2;
+}
+/*横並び*/
+.access-wrap{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 17px;
+	margin-top: 23px;
+	margin-bottom: 100px;
+}
+.access-map iframe{
+    width: 100%;
+    height: 100%;
+}
+.access-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.access-table th{
+    background: #472F24;
+    color: #fffffe;
+    width: 30%;
+    padding: 1rem;
+    text-align: center;
+}
+.access-table td{
+    background: #fffffe;
+    padding: 1rem;
+    text-align: left;
+}
+
+.access-table th,
+.access-table td{
+    border: 4px solid #FFFAE6;
+    vertical-align: middle;
+}
+
+/*--------------レスポンシブ---------------*/
+/*ハンバーガー*/
+/*PCでは隠す*/
+.ham-open{
+	display: none;
+	width: 55px;
+	height: 55px;
+	position: relative;
+	top: 8px;
+	right: 0px;
+	z-index: 99;
+	background-color: transparent;
+	border: none;
+}
+/*3本線*/
+.ham-open span{
+	display: block;
+	width: 40px;
+	height: 2px;
+	background-color: #fffffe;
+	margin: 10px auto;
+	transition: 0.3s;
+	z-index: 100;
+}
+/*背景　大きさ　普段は欄外に追いやる*/
+.ham-nav{
+	position: fixed;
+	top: 0;
+	transform: translateX(100%);
+	right: 0;
+	width: 80%;
+	height: 100%;
+	background-color: #FFFAE6;
+	transition: 0.3s;
+	z-index: 98;
+	padding: 20px;
+}
+/*ヘッダー*/
+.ham-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 40px;
+	width: 60%;
+}
+/*アクティブで出現*/
+.ham-nav.active{
+    transform: translateX(0);
+}
+/*開いている間は背景を暗く*/
+.overlay{
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	opacity: 0;
+	visibility: hidden;
+	transition: 0.3s ease;
+	z-index: 97;
+}
+.overlay.active{
+	opacity: 1;
+	visibility: visible;
+}
+/*スクロールできなくする*/
+.no-scroll{
+	overflow: hidden;
+}
+/*ハンバーガーがアクティブ時にバッテン*/
+.ham-open.active span:nth-child(1){
+  transform: translateY(12px) rotate(45deg);
+  background-color: #472F24;
+}
+.ham-open.active span:nth-child(2){
+  opacity: 0;
+}
+.ham-open.active span:nth-child(3){
+  transform: translateY(-12px) rotate(-45deg);
+  background-color: #472F24;
+}
+/*ハンバーガーCSS*/
+.ham-nav ul{
+	display: flex;
+	flex-direction: column;
+	gap: 45px;
+}
+.ham-nav a{
+	font-size: 1.5rem;
+	padding-left: 20px;
+}
+.ham-nav a::before{
+	content: "";
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url("../img/paw pad.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-right: 10px;
+	position: relative;
+	top:3px;
+}
+
+/*SP固定ボタン*/
+.sp-fixed{
+	display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #5A3E36;
+  z-index: 9999;
+  width: 100vw;
+}
+.sp-fixed a{
+	display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  text-align: center;
+  padding: 20px 0;
+  color: #fff;
+  font-size: 0.9rem;
+}
+.sp-fixed a:nth-child(odd){
+	background-color: #DE6C01;
+}
+/*電話アイコン*/
+.sp-fixed a:nth-child(1)::before{
+	content: "";
+	width: 18px;
+	height: 18px;
+	background-image: url("../img/phone.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+/*時計アイコン*/
+.sp-fixed a:nth-child(2)::before{
+	content: "";
+	width: 18px;
+	height: 18px;
+	background-image: url("../img/clock.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+/*webアイコン*/
+.sp-fixed a:nth-child(3)::before{
+	content: "";
+	width: 18px;
+	height: 18px;
+	background-image: url("../img/net.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+/*-------------------------------------------------------------*/
+@media(max-width: 768px){
+	.sp-fixed{
+		display: flex;
+	}
+	/*コンテンツ幅*/
+	.inner{
+		max-width: 90%;
+	}
+	/*ハンバーガー表示*/
+	.ham-open{
+		display: block;
+	}
+	/*マウスストーカー非表示*/
+	.mouse-stalker{
+		display: none;
+	}
+	/*グローバルナビ・固定ボタン非表示*/
+	.global-nav,
+	.fix-area{
+		display: none;
+	}
+	/*犬のお顔にかぶらないようにお知らせ下げる（ないほうがいいのかも）*/
+	/*.info{
+    margin-top: 40%;
+  }*/
+	/*診療内容縦並び*/
+	.MedicalServices-flame{
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .flame{
+    width: 100%;
+    max-width: 210px;
+  }
+  /*医師紹介縦並び*/
+	.doctor{
+		display: flex;
+		align-items: stretch;
+	  flex-direction: column;
+	  align-items: center;
+	  gap: 20px;
+	}
+  .doctor-img{
+    width: 100%;
+    max-width: 320px;
+  }
+	.doctor-title{
+	  white-space: nowrap;
+	}
+
+/*医師紹介テキスト揃え*/
+	.doctor-text{
+		width: 90%;                 /*topだけ写真よりはみでるからこの２行で調整してる*/
+		max-width: 320px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.doctor-background-text2{
+		margin-bottom: 30px;
+	}
+
+/*医師名のマージンを半分に*/
+	span.name{
+		margin-top: 20px;
+	}
+	span.subname{
+		margin-bottom: 20px;
+	}
+/*診療時間*/
+	.clinicHours-table{
+		font-size: 1rem;
+  }
+  .clinictime{
+  	font-size: 0.8rem;
+  }
+  .holiday{
+  	font-size: 0.9em;
+  }
+  .clinicHours-table th,
+  .clinicHours-table td{
+    padding: 8px 4px;
+  }
+
+ /* 予約エリア */
+ .reservation{
+    flex-direction: column;
+    gap: 20px;
+  }
+/*電話番号*/
+  .tel-text{
+    white-space: nowrap;
+  }
+ /*フッター*/
+.footer{
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: stretch;
+		gap: 30px;
+		height: auto;
+	}
+	.footer-map{
+		padding-top: 20px;
+    order: -1;
+    width: 100%;
+    max-width: none;/*制限解除*/
+    aspect-ratio: auto;
+  }
+  .footer-map iframe{
+    width: 100%;
+    height: 300px;
+  }
+/*----------当院について---------*/
+.clinic-gallery-position{
+	flex-direction: column;
+}
+.clinic-gallery-position{
+	display: block;
+}
+.clinic2{
+	margin-top: 30px;
+}
+.aboutus-img{
+	justify-content: center;
+	gap: 5px;
+}
+.human1{
+	width: 65%;
+	min-width: 150px;
+}
+.bird1{
+	width: 45%;
+	min-width: 100px;
+	margin-top: 60px;
+}
+/*---------診療内容------------*/
+/*動物一覧*/
+	.animal-grid {
+    grid-template-columns: 1fr;
+    gap: 30px 0; /*縦の余白*/
+    justify-items: center;
+  }
+	.animal-item img {
+		width: 160px;
+		height: 160px;
+	}
+	/*診療内容*/
+	.medical-grid {
+		grid-template-columns: 1fr;
+		gap: 30px 0;
+		max-width: 100%;
+	}
+	/*文字*/
+	.medical-item h3 {
+		font-size: 18px;
+	}
+  .medical-item li {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  /*中央寄せ*/
+  .medical-item {
+    text-align: center;
+  }
+
+  .medical-item ul {
+    padding-left: 0;
+    list-style-position: inside;/*マーカー*/
+    text-align: left;/*左揃え*/
+		display: inline-block;/*横幅はリスト内容に合わせる*/
+		padding-left: 1.1em;/*マーカーのインデント*/
+    list-style-position: inside; 
+  }
+  /*---------プライス-----------------*/
+  /*ナビ*/
+	.price-nav ul{
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+	.price-nav li{
+    flex: none;
+    width: 70%;
+    max-width: 400px;
+  }
+	.price-nav ul li a{
+    width: 100%;
+  }
+
+	/*表*/
+	.price-table{
+		width: 100%;
+  }
+  /*縦並び*/
+	.price-table th,
+	.price-table td{
+		width: 100%;
+		display: block;
+		box-sizing: border-box;
+		text-align: center;
+  }
+
+  /*セルの境界線*/
+  .price-table th,
+  .price-table td{
+    border-width: 5px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /*健康診断*/
+  .healthcheck-table{
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+	}
+  /*テーブルをカード風に縦並び　ヘッダーの居場所が…(-"-)
+    .healthcheck-table thead {
+        display: none;
+    }
+    .healthcheck-table tbody, 
+    .healthcheck-table tr, 
+    .healthcheck-table td, 
+    .healthcheck-table th {
+        display: block;
+        width: 100%;
+    }
+    */
+	.healthcheck-text{
+		width: 100%;
+	}
+  /*--------アクセス--------------*/
+  .access-wrap{
+    grid-template-columns: 1fr;
+}
